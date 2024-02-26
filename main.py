@@ -1,10 +1,17 @@
 import discord, tokens, os
 from discord.ext import commands
 from utils import ADM
+from cogs.ticket import Mensagem_Ticket_View
+
+views = [Mensagem_Ticket_View]
 
 class Bot(commands.Bot):
     def __init__(self):
         super().__init__(command_prefix='<>', intents=discord.Intents.all())
+
+    async def setup_hook(self):
+        for view in views:
+            bot.add_view(view())
 
 bot = Bot()
 async def carregar_cogs():
